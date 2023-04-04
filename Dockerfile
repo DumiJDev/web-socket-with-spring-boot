@@ -4,8 +4,10 @@ WORKDIR /app
 
 COPY . /app
 
-RUN mvn install package
+RUN mvn install package && mkdir /jars && cp ./target/app.jar /jars/app.jar && rm -rf *
 
 EXPOSE 8080
 
-CMD ["java", "-jar", "./target/app.jar"]
+WORKDIR /jars
+
+CMD ["java", "-jar", "./app.jar"]
